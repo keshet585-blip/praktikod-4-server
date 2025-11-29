@@ -11,9 +11,10 @@ var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
 
 var builder = WebApplication.CreateBuilder(args);
 
-// DB – לא נגעתי
+var connectionString = "server=bgnzgcwfzokmtpcqrjal-mysql.services.clever-cloud.com;port=3306;database=bgnzgcwfzokmtpcqrjal;user=untmg2cmm99ydcwf;password=IxmQCVhEbORAoXK87d03;SslMode=Preferred;";
 builder.Services.AddDbContext<ToDoDbContext>(options =>
-    options.UseMySql("name=ToDoDB", ServerVersion.Parse("9.5.0-mysql")));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
 
 // CORS
 builder.Services.AddCors(options =>
@@ -59,11 +60,10 @@ var app = builder.Build();
 app.UseCors("AllowAllOrigins");
 
 // Swagger
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 app.MapGet("/", () => "ToDo API is running.");
 

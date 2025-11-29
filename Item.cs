@@ -12,6 +12,4 @@ public partial class Item
     public bool? IsComplete { get; set; }
 
     public int? UserId { get; set; }
-
-    public virtual User? User { get; set; }
 }

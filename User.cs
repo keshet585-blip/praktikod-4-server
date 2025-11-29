@@ -7,11 +7,9 @@ public partial class User
 {
     public int Id { get; set; }
 
-    public string Username { get; set; } = null!;
+    public string? Username { get; set; }
 
-    public string PasswordHash { get; set; } = null!;
+    public string? PasswordHash { get; set; }
 
-    public DateTime CreatedAt { get; set; }
-
-    public virtual ICollection<Item> Items { get; set; } = new List<Item>();
+    public DateTime? CreatedAt { get; set; }
 }
