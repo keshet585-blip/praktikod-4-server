@@ -11,7 +11,7 @@ var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = "server=bgnzgcwfzokmtpcqrjal-mysql.services.clever-cloud.com;port=3306;database=bgnzgcwfzokmtpcqrjal;user=untmg2cmm99ydcwf;password=IxmQCVhEbORAoXK87d03;SslMode=Preferred;";
+var connectionString = Environment.GetEnvironmentVariable("ToDoDB");
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
