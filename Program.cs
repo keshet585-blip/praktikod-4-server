@@ -74,12 +74,23 @@ app.MapGet("/", () => "ToDo API is running.");
 app.Use(async (context, next) =>
 {
     var path = context.Request.Path;
+if (path == "/" ||
+    path.StartsWithSegments("/login") ||
+    path.StartsWithSegments("/register"))
+{
+    await next();
+    return;
+}
 
-    if (path.StartsWithSegments("/login") || path.StartsWithSegments("/register"))
-    {
-        await next();
-        return;
-    }
+  if (path.StartsWithSegments("/login") ||
+    path.StartsWithSegments("/register") ||
+    path.StartsWithSegments("/api/login") ||
+    path.StartsWithSegments("/api/register"))
+{
+    await next();
+    return;
+}
+
 
     var authHeader = context.Request.Headers.Authorization.FirstOrDefault();
     if (authHeader == null || !authHeader.StartsWith("Bearer "))
